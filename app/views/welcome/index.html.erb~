@@ -1,0 +1,304 @@
+<head>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+
+<style>
+div {
+	font-size:30px;	
+}
+
+#click:hover {
+	cursor:pointer;
+}
+
+table {
+	border:0px solid black;
+}
+
+td {
+	border:1px solid lightgray;
+	height:15px;
+	width:15px;
+}
+</style>
+
+<script>
+$(document).ready(function(){
+	var sArray = [][];
+	var table = $("#sudoTable").elements;
+	var c1 = 0;
+	var c2 = 0;
+
+	// Initial Pull + Fill
+	for (var z in table){
+		sArray[c1][c2] = z;
+		if(c1 >= 9){
+			c1 = 0;
+			c2 += 1;
+		}
+		else{
+			c1 +=;		
+		}
+	}
+
+	sArray = solveIt(sArray);
+
+`	// Final Push + Fill
+	for (var z in table){
+		z = sArray[c1][c2];
+		if(c1 >= 9){
+			c1 = 0;
+			c2 += 1;
+		}
+		else{
+			c1 +=;		
+		}
+	}
+
+	$("#click").click(function() {
+	$('#output').text('Test message here');
+	});
+});
+
+function solveIt(var array){
+	var row1 = new counterBox();
+	var options = [0,1,2,3,4,5,6,7,8,9];
+
+	var x1 = 0;
+	var x2 = 0;
+	foreach(var x in table){
+		var c1 = 0;
+		var c2 = 0;
+
+		// Horizontal Row
+		for(c = 0; c < 10; c++){
+			if(array[c1][c2] != "X"){
+				options.Remove(array[c1][c2]);
+			}
+			if(c1 >= 9){
+				c1 = 0;
+				c2 += 1;
+			}
+			else{
+				c1 +=;		
+			}
+		}
+
+		// Vertical Row
+		c1 = 0;
+		c2 = 0;
+		for(c=0; c < 10, c++){
+			if(array[c2][c1] != "X"){
+			options.Remove(array[c2][c1]);
+			}
+			if(c1 >= 9){
+				c1 = 0;
+				c2 += 1;
+			}
+			else{
+				c1 +=;		
+			}
+		}
+
+		// 9 Block Horizontal
+		if(x1 == 0 || x1 % 3 == 0){ // 0, 3, 6
+			if(array[x1+1][x2] != "X"){
+				options.Remove(array[x1+1][x2]);
+			}
+			if(array[x1+2][x2] == "X"){
+				options.Remove(array[x1+2][x2]);
+			}
+		}
+		if((x1 - 1) % 3 == 0){ // 1, 4, 7
+			if(array[x1-1][x2] != "X"){
+				options.Remove(array[x1-1][x2]);
+			}
+			if(array[x1+1][x2] == "X"){
+				options.Remove(array[x1+1][x2]);
+			}
+		}
+		if((x1 - 2) == 0 || x1 % 3 == 0){ // 2, 5, 8
+			if(array[x1-2][x2] != "X"){
+				options.Remove(array[x1-2][x2]);
+			}
+			if(array[x1-1][x2] == "X"){
+				options.Remove(array[x1-1][x2]);
+			}
+		}
+
+		// 9 Block Vertical
+		if(x2 == 0 || x2 % 3 == 0){ // 0, 3, 6
+			if(array[x1][x2 + 1] != "X"){
+				options.Remove(array[x1][x2 + 1]);
+			}
+			if(array[x1][x2 + 2] == "X"){
+				options.Remove(array[x1][x2 + 2]);
+			}
+		}
+		if((x2 - 1) % 3 == 0){ // 1, 4, 7
+			if(array[x1][x2 - 1] != "X"){
+				options.Remove(array[x1][x2 - 1]);
+			}
+			if(array[x1][x2 + 1] == "X"){
+				options.Remove(array[x1][x2 + 1]);
+			}
+		}
+		if((x2 - 2) == 0 || x1 % 3 == 0){ // 2, 5, 8
+			if(array[x1][x2 - 2] != "X"){
+				options.Remove(array[x1][x2 - 2]);
+			}
+			if(array[x1][x2 - 1] == "X"){
+				options.Remove(array[x1][x2 - 1]);
+			}
+		}
+
+		// Finalize Options, Check for Match, Add
+		if(options.Count() == 1){
+			array[x1][x2] = options[0];
+		}
+
+		// To do here:
+			
+		
+		if(x1 >= 9){
+			x1 = 0;
+			x2 += 1;
+		}
+		else{
+			x1 += 1;		
+		}
+	}
+}
+
+object counterBox(){
+	this.0 = 0;
+	this.1 = 0;
+	this.2 = 0;
+	this.3 = 0;
+	this.4 = 0;
+	this.5 = 0;
+	this.6 = 0;
+	this.7 = 0;
+	this.8 = 0;
+	this.9 = 0;
+}
+
+</script>
+
+</head>
+
+<body>
+<h1>Welcome#index</h1>
+<center><b>
+
+<div id='click'>
+Testing Jquery Click
+</div>
+
+<table id='sudoTable'>
+<tr>
+<td>X</td>
+<td>X</td>
+<td>X</td>
+<td>X</td>
+<td>X</td>
+<td>X</td>
+<td>X</td>
+<td>X</td>
+<td>X</td>
+</td>
+<tr>
+<td>X</td>
+<td>X</td>
+<td>X</td>
+<td>X</td>
+<td>X</td>
+<td>X</td>
+<td>X</td>
+<td>X</td>
+<td>X</td>
+</td>
+<tr>
+<td>X</td>
+<td>X</td>
+<td>X</td>
+<td>X</td>
+<td>X</td>
+<td>X</td>
+<td>X</td>
+<td>X</td>
+<td>X</td>
+</td>
+<tr>
+<td>X</td>
+<td>X</td>
+<td>X</td>
+<td>X</td>
+<td>X</td>
+<td>X</td>
+<td>X</td>
+<td>X</td>
+<td>X</td>
+</td>
+<tr>
+<td>X</td>
+<td>X</td>
+<td>X</td>
+<td>X</td>
+<td>X</td>
+<td>X</td>
+<td>X</td>
+<td>X</td>
+<td>X</td>
+</td>
+<tr>
+<td>X</td>
+<td>X</td>
+<td>X</td>
+<td>X</td>
+<td>X</td>
+<td>X</td>
+<td>X</td>
+<td>X</td>
+<td>X</td>
+</td>
+<tr>
+<td>X</td>
+<td>X</td>
+<td>X</td>
+<td>X</td>
+<td>X</td>
+<td>X</td>
+<td>X</td>
+<td>X</td>
+<td>X</td>
+</td>
+<tr>
+<td>X</td>
+<td>X</td>
+<td>X</td>
+<td>X</td>
+<td>X</td>
+<td>X</td>
+<td>X</td>
+<td>X</td>
+<td>X</td>
+</td>
+<tr>
+<td>X</td>
+<td>X</td>
+<td>X</td>
+<td>X</td>
+<td>X</td>
+<td>X</td>
+<td>X</td>
+<td>X</td>
+<td>X</td>
+</td>
+</table>
+
+<br/><br/><br/><br/>
+<div id='output'>
+
+</div>
+</b></center>
+</body>
