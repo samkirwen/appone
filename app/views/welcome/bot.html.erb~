@@ -1,0 +1,22 @@
+<html>
+<style>
+#chatbox{
+	width:550px;
+	height:200px;
+	border: 1px solid lightgray;
+	margin-bottom:15px;
+}
+
+#chatinput{
+	width:480px;
+}
+</style>
+
+<body>
+<h2>chat bot one</h2>
+<div id="chatbox">
+
+</div>
+<input id="chatinput" type="text" /><button>enter</button>
+<body>
+</html>
