@@ -3,7 +3,9 @@ Appone::Application.routes.draw do
 
   root to: 'static_welcome#index'
 
-   match 'welcome/bot' => 'welcome#bot'
+  match 'welcome/bot' => 'welcome#bot'
+
+  match 'welcome/input' => 'welcome#input'
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

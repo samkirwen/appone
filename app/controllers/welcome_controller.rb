@@ -11,4 +11,7 @@ class WelcomeController < ApplicationController
   @message.save
   redirect_to @message
   end
+
+  def message_url (x)
+  end
 end

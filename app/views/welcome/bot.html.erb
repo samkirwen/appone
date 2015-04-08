@@ -8,15 +8,107 @@
 }
 
 #chatinput{
-	width:485px;
+	width:370px;
+	padding-left:8px;
 }
+
+#nameinput{
+	width:80px;
+}
+
+.userclass{
+	color:blue;
+}
+
+.botclass{
+	color:green;
+}
+
+.nomessage{
+	color:gray;
+}
+
+.hidediv{
+	display:none;
+	text-align:center;
+	margin-top:8px;
+	margin-bottom:8px;
+}
+
+.hiddeninput{
+	width:450px;
+}
+
 </style>
 
 <body>
-<h2>chat bot one</h2>
+<center>
+<div id="loginBox">
+</div>
+</center>
 <div id="chatbox">
 
 </div>
-<input id="chatinput" type="text" /><button>enter</button>
-<body>
+
+<!-- <form onsubmit="chatSend(); return;"> -->
+<input id="nameinput" class="userclass" type="text" value="sam"/> : <input id="chatinput" type="text"/><button onclick="chatSend();">enter</button>
+<!-- </form> -->
+
+</body>
+
+     <script>
+	// Global Variables
+	chatbotName = "chat_bot";	
+	count = 0;
+
+	// This occurs after chat message is submitted
+       function chatSend(){
+		var inputText = document.getElementById("chatinput").value;
+		var userName = document.getElementById("nameinput").value;
+		var chatBox = document.getElementById("chatbox");
+		
+		chatBox.innerHTML = chatBox.innerHTML 
+				    + '<span class="userclass">' + userName + '</span>' + ': '
+				    + '<span class="usertext">' + inputText + '</span>'
+				    + '<br>';
+
+		// -------------------------------------------------------------
+		// AJAX Code goes here, send message to server and get response.
+		// -------------------------------------------------------------
+		
+		// if(no message found){
+		var noMsg = 'No Messages found, click <a href="#!" onclick="showMsgDiv(' 
+			     + count + ')">here</a> to submit your own!';
+
+		// Add response
+		chatBox.innerHTML = chatBox.innerHTML 
+				    + '<span class="botclass">' + chatbotName + '</span>' + ': '
+				    + '<span class="nomessage">' + noMsg + '</span>'
+				    + '<br>';
+
+		// Add hidden div
+		chatBox.innerHTML = chatBox.innerHTML
+				    + '<div id="' + count + '" class="hidediv">'
+				    + '<input type="text" class="hiddeninput"><button onclick="hiddenSubmit(' + count + ')">submit</button>';
+
+
+		count++;
+	}
+
+	function showMsgDiv(id){
+		document.getElementById(id).style.display = "block";
+	}
+	
+	// Adding a new message to database
+	function hiddenSubmit(id){
+
+		// -------------------------------------------------------------
+		// AJAX Code goes here, send message to server and get response.
+		// -------------------------------------------------------------
+
+		alert("message submitted!");
+		document.getElementById(id).style.display = "none";
+	}
+     </script>
+
 </html>
