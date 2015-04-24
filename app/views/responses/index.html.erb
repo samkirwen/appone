@@ -1,0 +1,15 @@
+<h1>Listing articles</h1>
+ 
+<table>
+  <tr>
+    <th>Sender</th>
+    <th>Body</th>
+  </tr>
+ 
+  <% @responses.each do |response| %>
+    <tr>
+      <td><%= response.sender %></td>
+      <td><%= response.body %></td>
+    </tr>
+  <% end %>
+</table>

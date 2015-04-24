@@ -11,13 +11,24 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20150327015019) do
+ActiveRecord::Schema.define(:version => 20150424094915) do
 
   create_table "messages", :force => true do |t|
     t.string   "input"
     t.string   "response"
     t.integer  "upvote"
     t.integer  "downvote"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "responses", :force => true do |t|
+    t.string   "sender"
+    t.text     "body"
+    t.integer  "up"
+    t.integer  "down"
+    t.integer  "total"
+    t.datetime "date"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end

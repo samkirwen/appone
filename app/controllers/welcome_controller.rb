@@ -5,13 +5,9 @@ class WelcomeController < ApplicationController
   def bot
   end
 
-  def input
-   @message = Message.new(params[:message])
- 
-  @message.save
-  redirect_to @message
+  def fresponse
+        @response = Response.where("body = ?", params[:body])
+	render json: @response.first
   end
 
-  def message_url (x)
-  end
 end

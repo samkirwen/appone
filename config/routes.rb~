@@ -1,11 +1,12 @@
 Appone::Application.routes.draw do
-  get "welcome/index"
 
-  root to: 'static_welcome#index'
+  resources :responses
+ 
+  root to: 'welcome#index'
 
   match 'welcome/bot' => 'welcome#bot'
 
-  match 'welcome/match' => 'welcome#match'
+  match 'responses/fresponse' => 'responses#fresponse'
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

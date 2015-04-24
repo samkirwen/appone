@@ -1,4 +1,8 @@
 <html>
+
+<!-- includes -->
+<script src="jquery-2.1.3.js"></script>
+
 <style>
 #chatbox{
 	width:550px;
@@ -75,7 +79,20 @@
 		// -------------------------------------------------------------
 		// AJAX Code goes here, send message to server and get response.
 		// -------------------------------------------------------------
-		
+
+		$.ajax({
+		    url: "fresponse?body=" + inputText,
+		    type: "POST",
+		    dataType: "json",
+		    data: {"body": inputText},
+		success: function(data){
+	 	try{
+       		chatBox.innerHTML = chatBox.innerHTML 
+				    + '<span class="botclass">' + chatbotName + '</span>' + ': '
+				    + '<span class="nomessage">' + data.body + '</span>'
+				    + '<br>';
+		}
+		catch(err){
 		// if(no message found){
 		var noMsg = 'No Messages found, click <a href="#!" onclick="showMsgDiv(' 
 			     + count + ')">here</a> to submit your own!';
@@ -90,6 +107,17 @@
 		chatBox.innerHTML = chatBox.innerHTML
 				    + '<div id="' + count + '" class="hidediv">'
 				    + '<input type="text" class="hiddeninput"><button onclick="hiddenSubmit(' + count + ')">submit</button>';
+		}
+    		},
+	        error: function(error){
+			 console.log("Error:");
+			 console.log(error);
+		    }
+		});
+
+		// -------------------------------------------------------------
+		// End AJAX
+		// -------------------------------------------------------------
 
 
 		count++;
