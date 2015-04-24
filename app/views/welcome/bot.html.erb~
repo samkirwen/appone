@@ -65,6 +65,14 @@
 	chatbotName = "chat_bot";	
 	count = 0;
 
+	// Listeners
+	$('#chatinput').on('keydown', function(e) {
+   	 if (e.which == 13) {
+		alert("pressed!");
+        	e.preventDefault();
+    	}
+	});
+
 	// This occurs after chat message is submitted
        function chatSend(){
 		var inputText = document.getElementById("chatinput").value;
@@ -81,16 +89,19 @@
 		// -------------------------------------------------------------
 
 		$.ajax({
-		    url: "fresponse?body=" + inputText,
+		    url: "fresponse?original=" + inputText,
 		    type: "POST",
 		    dataType: "json",
-		    data: {"body": inputText},
+		 // data: {"original": inputText},
 		success: function(data){
 	 	try{
-       		alert(data.body);
+       		chatBox.innerHTML = chatBox.innerHTML 
+				    + '<span class="botclass">' + chatbotName + '</span>' + ': '
+				    + '<span class="nomessage">' + data.body + '</span>'
+				    + '<br>';
 		}
 		catch(err){
-				// if(no message found){
+		// if(no message found){
 		var noMsg = 'No Messages found, click <a href="#!" onclick="showMsgDiv(' 
 			     + count + ')">here</a> to submit your own!';
 

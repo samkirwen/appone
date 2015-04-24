@@ -2,14 +2,16 @@
  
 <table>
   <tr>
-    <th>Title</th>
-    <th>Text</th>
+    <th>Sender</th>
+    <th>Original</th>
+    <th>Body</th>
   </tr>
  
   <% @responses.each do |response| %>
     <tr>
       <td><%= response.sender %></td>
       <td><%= response.body %></td>
+      <td><%= response.original %></td>
     </tr>
   <% end %>
 </table>

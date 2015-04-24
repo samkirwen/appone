@@ -1,4 +1,4 @@
-%= form_for :response, url: responses_path do |f| %>
+<%= form_for :response, url: responses_path do |f| %>
   <p>
     <%= f.label :sender %><br>
     <%= f.text_field :sender %>
@@ -6,6 +6,11 @@
  
   <p>
     <%= f.label :body %><br>
+    <%= f.text_area :body %>
+  </p>
+
+  <p>
+    <%= f.label :original %><br>
     <%= f.text_area :body %>
   </p>
  

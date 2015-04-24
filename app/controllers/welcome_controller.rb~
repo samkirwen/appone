@@ -6,8 +6,8 @@ class WelcomeController < ApplicationController
   end
 
   def fresponse
-        @response = Response.where("body = ?", params[:body])
-	render json: @response
+        @response = Response.where("original = ?", params[:body])
+	render json: @response.first
   end
 
 end

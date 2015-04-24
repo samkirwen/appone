@@ -1,3 +1,3 @@
 class Response < ActiveRecord::Base
-  attr_accessible :body, :date, :down, :sender, :total, :up
+  attr_accessible :body, :date, :down, :sender, :total, :up, :original
 end

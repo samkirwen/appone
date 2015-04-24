@@ -4,12 +4,14 @@
   <tr>
     <th>Sender</th>
     <th>Body</th>
+    <th>Original</th>
   </tr>
  
   <% @responses.each do |response| %>
     <tr>
       <td><%= response.sender %></td>
       <td><%= response.body %></td>
+      <td><%= response.original %></td>
     </tr>
   <% end %>
 </table>
