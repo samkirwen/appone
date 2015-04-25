@@ -10,4 +10,13 @@ class WelcomeController < ApplicationController
 	render json: @response.first
   end
 
+  def finput
+	@response = Response.new()
+	@response.original = params[:o]
+	@response.sender = params[:s]
+	@response.body = params[:b]
+	@response.save
+	render json: @response
+  end
+
 end

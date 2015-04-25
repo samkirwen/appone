@@ -6,9 +6,10 @@
 <style>
 #chatbox{
 	width:550px;
-	height:200px;
+	height:400px;
 	border: 1px solid lightgray;
 	margin-bottom:15px;
+	overflow:scroll;
 }
 
 #chatinput{
@@ -68,10 +69,15 @@
 	// Listeners
 	$('#chatinput').on('keydown', function(e) {
    	 if (e.which == 13) {
-		alert("pressed!");
+		chatSend();
         	e.preventDefault();
     	}
 	});
+
+	function updateScroll(){
+          var element = document.getElementById("chatbox");
+          element.scrollTop = element.scrollHeight;
+       }
 
 	// This occurs after chat message is submitted
        function chatSend(){
@@ -83,6 +89,9 @@
 				    + '<span class="userclass">' + userName + '</span>' + ': '
 				    + '<span class="usertext">' + inputText + '</span>'
 				    + '<br>';
+
+		// Update Scroll
+		updateScroll();
 
 		// -------------------------------------------------------------
 		// AJAX Code goes here, send message to server and get response.
@@ -99,6 +108,10 @@
 				    + '<span class="botclass">' + chatbotName + '</span>' + ': '
 				    + '<span class="nomessage">' + data.body + '</span>'
 				    + '<br>';
+
+		// Update Scroll
+		updateScroll();
+
 		}
 		catch(err){
 		// if(no message found){
@@ -111,10 +124,13 @@
 				    + '<span class="nomessage">' + noMsg + '</span>'
 				    + '<br>';
 
+		// Update Scroll
+		updateScroll();
+
 		// Add hidden div
 		chatBox.innerHTML = chatBox.innerHTML
 				    + '<div id="' + count + '" class="hidediv">'
-				    + '<input type="text" class="hiddeninput"><button onclick="hiddenSubmit(' + count + ')">submit</button>';
+				    + '<input id="hi' + count + '" type="text" class="hiddeninput"><button onclick="hiddenSubmit(' + count + ',\'' + inputText + '\')">submit</button>';
 		}
     		},
 	        error: function(error){
@@ -136,13 +152,33 @@
 	}
 	
 	// Adding a new message to database
-	function hiddenSubmit(id){
+	function hiddenSubmit(id, ogText){
+
+		var userName = document.getElementById("nameinput").value;
+		var inText = document.getElementById("hi" + id).value;
 
 		// -------------------------------------------------------------
 		// AJAX Code goes here, send message to server and get response.
 		// -------------------------------------------------------------
 
-		alert("message submitted!");
+		$.ajax({
+		    url: "finput?o=" + ogText + "&s=" + userName + "&b=" + inText,
+		    type: "POST",
+		    dataType: "json",
+		 // data: {"original": inputText},
+		success: function(data){
+			alert("message submitted!");
+    		},
+	        error: function(error){
+			 alert("message failed!");
+		    }
+		});
+
+		
+		// -------------------------------------------------------------
+		// End AJAX
+		// -------------------------------------------------------------
+
 		document.getElementById(id).style.display = "none";
 	}
      </script>
