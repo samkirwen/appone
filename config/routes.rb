@@ -8,6 +8,8 @@ Appone::Application.routes.draw do
 
   match 'welcome/fresponse' => 'welcome#fresponse'
   match 'welcome/finput' => 'welcome#finput'
+  match 'welcome/fup' => 'welcome#fup'
+  match 'welcome/fdown' => 'welcome#fdown'
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

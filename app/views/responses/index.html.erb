@@ -5,13 +5,19 @@
     <th>Sender</th>
     <th>Body</th>
     <th>Original</th>
+    <th>Up</th>
+    <th>Down</th>
+    <th>Total</th>
   </tr>
  
   <% @responses.each do |response| %>
     <tr>
-      <td><%= response.sender %></td>
-      <td><%= response.body %></td>
-      <td><%= response.original %></td>
+	<td><%= response.sender %></td>
+	<td><%= response.body %></td>
+	<td><%= response.original %></td>
+	<td><%= response.up %></td>
+	<td><%= response.down %></td>
+	<td><%= response.total %></td>
     </tr>
   <% end %>
 </table>

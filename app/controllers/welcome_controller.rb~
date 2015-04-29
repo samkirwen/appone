@@ -6,8 +6,8 @@ class WelcomeController < ApplicationController
   end
 
   def fresponse
-        @response = Response.where("original = ?", params[:original])
-	render json: @response.first
+        @response = Response.where("original = ?", params[:original]).order(total: :desc).first
+	render json: @response
   end
 
   def finput
@@ -15,7 +15,25 @@ class WelcomeController < ApplicationController
 	@response.original = params[:o]
 	@response.sender = params[:s]
 	@response.body = params[:b]
+	@response.up = 1
+	@response.down = 0
+	@response.total = 1
 	@response.save
+	render json: @response
+  end
+
+  def fup
+	u = Address.find_by_cid(params[:id])
+	u.up = u.up + 1
+	u.total = u.total + 1
+	u.save
+  end
+
+  def fdown
+	u = Address.find_by_cid(params[:id])
+	u.up = u.up + 1
+	u.total = u.total + 1
+	u.save
   end
 
 end

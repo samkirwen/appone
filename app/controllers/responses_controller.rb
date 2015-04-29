@@ -8,6 +8,9 @@ class ResponsesController < ApplicationController
 
 	def create
 		@response = Response.new(params[:response])
+		@response.up = 1
+		@response.down = 0
+		@response.total = 1
 		@response.save
 		render text: params[:response].inspect
 	end
