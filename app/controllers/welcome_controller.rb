@@ -23,17 +23,19 @@ class WelcomeController < ApplicationController
   end
 
   def fup
-	u = Address.find_by_cid(params[:id])
+	u = Response.find(params[:id])
 	u.up = u.up + 1
 	u.total = u.total + 1
 	u.save
+	render json: u
   end
 
   def fdown
-	u = Address.find_by_cid(params[:id])
+	u = Response.find(params[:id])
 	u.down = u.down + 1
 	u.total = u.total - 1
 	u.save
+	render json: u
   end
 
 end

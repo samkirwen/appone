@@ -2,6 +2,7 @@
 
 <!-- includes -->
 <script src="jquery-2.1.3.js"></script>
+<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
 
 <style>
 #chatbox{
@@ -19,6 +20,42 @@
 
 #nameinput{
 	width:80px;
+}
+
+.expand{
+	color:lightgray;
+}
+
+.rating{
+	color:lightgray;
+}
+
+.up{
+	color:lightgreen;
+}
+
+.down{
+	color:pink;
+}
+
+.expand:hover{
+	color:black;
+	cursor:pointer;
+}
+
+.rating:hover{
+	color:black;
+	cursor:pointer;
+}
+
+.up:hover{
+	color:green;
+	cursor:pointer;
+}
+
+.down:hover{
+	color:red;
+	cursor:pointer;
 }
 
 .userclass{
@@ -105,9 +142,12 @@
 		success: function(data){
 	 	try{
        		chatBox.innerHTML = chatBox.innerHTML 
-				    + '<span class="botclass">' + chatbotName + '</span>' + ': '
-				    + '<span class="nomessage">' + data.body + '</span>'
-				    + '<button>+</button><button>-</button><br>';
+	    + '<span class="botclass">' + chatbotName + '</span>' + ': '
+	    + '<span class="message">' + data.body + '</span>'
+	    + '<span class="rating" id="rat' + data.id + '">   (' + data.total + ') </span>'
+	    + '<a onclick="vote(' + data.id + ',\'fup\')"><i id="up' + data.id + '" class="up fa fa-plus"></i></a> '
+	    + '<a onclick="vote(' + data.id + ',\'fdown\')"><i id="down' + data.id + '" class="down fa fa-minus"></i></a>'
+	    + ' <a onclick="expand(' + data.id + ')"><i id="exp' + data.id + '" class="expand fa fa-angle-double-down"></i></a>';
 
 		// Update Scroll
 		updateScroll();
@@ -191,10 +231,16 @@
 		    type: "POST",
 		    dataType: "json",
 		success: function(data){
-			alert("up submitted!");
+			$("#rat" + id).html(" ( " + data.total + " ) ");
+			if(url == "fup"){
+				$("#up" + id).css('color', 'green');
+			}
+			else if(url == "fdown"){
+				$("#down" + id).css('color', 'red');
+			}
     		},
 	        error: function(error){
-			 alert("up failed!");
+			// alert("vote failed!");
 		    }
 		});
 	}
