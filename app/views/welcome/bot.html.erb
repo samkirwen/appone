@@ -107,7 +107,7 @@
        		chatBox.innerHTML = chatBox.innerHTML 
 				    + '<span class="botclass">' + chatbotName + '</span>' + ': '
 				    + '<span class="nomessage">' + data.body + '</span>'
-				    + '<br>';
+				    + '<button onclick="vote(' + data.id + '">+</button><button>-</button><br>';
 
 		// Update Scroll
 		updateScroll();
@@ -182,6 +182,21 @@
 		// -------------------------------------------------------------
 
 		document.getElementById(id).style.display = "none";
+	}
+
+	// Voting a response
+	function vote(id, url){
+		$.ajax({
+		    url: url + "?id=" + id,
+		    type: "POST",
+		    dataType: "json",
+		success: function(data){
+			alert("up submitted!");
+    		},
+	        error: function(error){
+			 alert("up failed!");
+		    }
+		});
 	}
      </script>
 
