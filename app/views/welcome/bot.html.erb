@@ -122,6 +122,9 @@
 		var userName = document.getElementById("nameinput").value;
 		var chatBox = document.getElementById("chatbox");
 		
+		// Clear text
+		document.getElementById("chatinput").value = "";
+
 		chatBox.innerHTML = chatBox.innerHTML 
 				    + '<span class="userclass">' + userName + '</span>' + ': '
 				    + '<span class="usertext">' + inputText + '</span>'
@@ -147,7 +150,8 @@
 	    + '<span class="rating" id="rat' + data.id + '">   (' + data.total + ') </span>'
 	    + '<a onclick="vote(' + data.id + ',\'fup\')"><i id="up' + data.id + '" class="up fa fa-plus"></i></a> '
 	    + '<a onclick="vote(' + data.id + ',\'fdown\')"><i id="down' + data.id + '" class="down fa fa-minus"></i></a>'
-	    + ' <a onclick="expand(' + data.id + ')"><i id="exp' + data.id + '" class="expand fa fa-angle-double-down"></i></a>';
+	    + ' <a onclick="expand(' + data.id + ')"><i id="exp' + data.id + '" class="expand fa fa-angle-double-down"></i></a>'
+	    + '<br>';
 
 		// Update Scroll
 		updateScroll();
@@ -169,8 +173,10 @@
 
 		// Add hidden div
 		chatBox.innerHTML = chatBox.innerHTML
-				    + '<div id="' + count + '" class="hidediv">'
-				    + '<input id="hi' + count + '" type="text" class="hiddeninput"><button onclick="hiddenSubmit(' + count + ',\'' + inputText + '\')">submit</button>';
+		+ '<div id="' + count + '" class="hidediv">'
+		+ '<form action="#" onsubmit="hiddenSubmit(' + count + ',\'' + inputText + '\')">'
+		+ '<input id="hi' + count + '" type="text" class="hiddeninput">'
+		+ '<button>submit</button></form>';
 		}
     		},
 	        error: function(error){
@@ -209,7 +215,15 @@
 		    dataType: "json",
 		 // data: {"original": inputText},
 		success: function(data){
-			alert("message submitted!");
+		var chatBox = document.getElementById("chatbox");
+		chatBox.innerHTML = chatBox.innerHTML
+		+ '<span class="botclass">' + chatbotName + '</span>' + ': '
+		+ '<span class="message">' + data.body + '</span>'
+		+ '<span class="rating" id="rat' + data.id + '">   (' + data.total + ') </span>'
+		+ '<a onclick="vote(' + data.id + ',\'fup\')"><i id="up' + data.id + '" class="up fa fa-plus"></i></a> '
+		+ '<a onclick="vote(' + data.id + ',\'fdown\')"><i id="down' + data.id + '" class="down fa fa-minus"></i></a>'
+		+ ' <a onclick="expand(' + data.id + ')"><i id="exp' + data.id + '" class="expand fa fa-angle-double-down"></i></a>'
+		+ '<br>';
     		},
 	        error: function(error){
 			 alert("message failed!");
